@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState, useCallback } fr
 import { User as SupabaseUser, Session, AuthError } from '@supabase/supabase-js';
 import { supabase } from './supabase';
 import { User } from '@/types';
-import { mapUserFromDb } from '@/lib/mappers';
+// mapUserFromDb is used via server API; keep import if needed in future
 
 interface AuthContextType {
   user: User | null;

@@ -39,8 +39,9 @@ export async function POST(request: Request) {
     if (!valid) return NextResponse.json({ error: 'Invalid PIN' }, { status: 401 });
 
     return NextResponse.json({ success: true, member: { id: member.id, name: member.name } });
-  } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Unknown error' }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

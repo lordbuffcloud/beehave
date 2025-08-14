@@ -30,8 +30,9 @@ export default function PinLoginPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Invalid credentials');
       setSuccess(`Welcome, ${json.member.name}! Limited access granted.`);
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Unknown error';
+      setError(message);
     } finally {
       setLoading(false);
     }

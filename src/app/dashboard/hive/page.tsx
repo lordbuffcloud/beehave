@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert } from '@/components/ui/alert';
 import { ProtectedRoute } from '@/components/auth/protected-route';
-import { User } from '@/types';
 
 type AddFormData = { name: string; pin: string };
 
@@ -28,14 +26,16 @@ export default function HivePage() {
           headers: { 'Accept': 'application/json' },
         });
         const text = await res.text();
-        let json: any;
+        let json: unknown;
         try { json = JSON.parse(text); } catch {
           throw new Error('Unexpected response from server');
         }
-        if (!res.ok) throw new Error(json.error || 'Failed to load members');
-        setFamilyMembers(json.members || []);
-      } catch (e: any) {
-        setError(e.message);
+        const parsed = json as { members?: Array<{ id: string; name: string }> ; error?: string };
+        if (!res.ok) throw new Error(parsed.error || 'Failed to load members');
+        setFamilyMembers(parsed.members || []);
+      } catch (e: unknown) {
+        const message = e instanceof Error ? e.message : 'Unknown error';
+        setError(message);
       }
       setLoading(false);
     };
@@ -55,8 +55,9 @@ export default function HivePage() {
       if (!res.ok) throw new Error(json.error || 'Failed to add member');
       setFamilyMembers(prev => [...prev, { id: json.member.id, name: json.member.name }]);
       setFormData({ name: '', pin: '' });
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Unknown error';
+      setError(message);
     } finally {
       setLoading(false);
     }
