@@ -30,7 +30,7 @@ export default function HivePage() {
         try { json = JSON.parse(text); } catch {
           throw new Error('Unexpected response from server');
         }
-        const parsed = json as { members?: Array<{ id: string; name: string }> ; error?: string };
+        const parsed = json as { members?: Array<{ id: string; name: string }>; error?: string };
         if (!res.ok) throw new Error(parsed.error || 'Failed to load members');
         setFamilyMembers(parsed.members || []);
       } catch (e: unknown) {
@@ -74,10 +74,10 @@ export default function HivePage() {
           {familyMembers.map(member => (
             <Card key={member.id}>
               <CardHeader>
-                <CardTitle>{member.name} ({member.role})</CardTitle>
+                <CardTitle>{member.name}</CardTitle>
               </CardHeader>
               <CardContent>
-                Honey: {member.honeyBalance}
+                Child profile with PIN-only access
               </CardContent>
             </Card>
           ))}
