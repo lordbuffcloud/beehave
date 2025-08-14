@@ -1,0 +1,78 @@
+{
+  "name": "Beehave - Family Chore Manager",
+  "short_name": "Beehave",
+  "description": "Family chore management with honey rewards",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbbf24",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "${BASE_PATH}/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "${BASE_PATH}/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["productivity", "family", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Kid Mode",
+      "short_name": "Kid Mode",
+      "description": "Access simplified interface for children",
+      "url": "/kid-mode",
+      "icons": [{ "src": "/icons/kid-mode-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Parent Dashboard",
+      "short_name": "Dashboard",
+      "description": "Access parent management dashboard",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icons/dashboard-96x96.png", "sizes": "96x96" }]
+    }
+  ]
+} 

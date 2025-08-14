@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 47 100% 97%;
+    --foreground: 39 100% 7%;
+    --card: 47 100% 95%;
+    --card-foreground: 39 100% 7%;
+    --popover: 47 100% 97%;
+    --popover-foreground: 39 100% 7%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 47 100% 97%;
+    --secondary: 45 100% 85%;
+    --secondary-foreground: 39 100% 15%;
+    --muted: 45 100% 90%;
+    --muted-foreground: 39 50% 40%;
+    --accent: 42 93% 55%;
+    --accent-foreground: 47 100% 97%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 45 100% 85%;
+    --input: 45 100% 85%;
+    --ring: 45 93% 47%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 39 100% 4%;
+    --foreground: 47 100% 93%;
+    --card: 39 100% 6%;
+    --card-foreground: 47 100% 93%;
+    --popover: 39 100% 4%;
+    --popover-foreground: 47 100% 93%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 39 100% 4%;
+    --secondary: 39 50% 10%;
+    --secondary-foreground: 47 100% 85%;
+    --muted: 39 50% 10%;
+    --muted-foreground: 45 50% 60%;
+    --accent: 42 93% 55%;
+    --accent-foreground: 39 100% 4%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 39 50% 10%;
+    --input: 39 50% 10%;
+    --ring: 45 93% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    @apply font-sans antialiased;
+  }
+}
+
+/* Custom animations for Beehave */
+@layer utilities {
+  .animate-buzz {
+    animation: buzz 0.5s ease-in-out;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-honey-drop {
+    animation: honey-drop 1s ease-out;
+  }
+}
+
+@keyframes honey-drop {
+  0% {
+    transform: translateY(-100%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Kid mode specific styles */
+.kid-mode {
+  /* Larger touch targets for children */
+  button {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  /* Simplified UI elements */
+  input, select {
+    @apply text-lg p-4;
+  }
+  
+  /* High contrast for accessibility */
+  .high-contrast {
+    filter: contrast(1.25) saturate(1.1);
+  }
+}
+
+/* Bee-themed gradients */
+.honey-gradient {
+  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #f59e0b 100%);
+}
+
+.bee-gradient {
+  background: linear-gradient(135deg, #fffbeb 0%, #fcd34d 50%, #d97706 100%);
+} 
