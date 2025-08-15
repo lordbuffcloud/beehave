@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/supabase-server';
 import { mapUserFromDb } from '@/lib/mappers';
 
-export async function GET(_req: Request, { params }: { params: any }) {
+export async function GET(_req: Request, context: unknown) {
   try {
-    const userId = params.id;
+    const { params } = (context || {}) as { params: { id: string } };
+    const userId = params?.id;
     if (!userId) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
 
     const { data, error } = await supabaseServer
