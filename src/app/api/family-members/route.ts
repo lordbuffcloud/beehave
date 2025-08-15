@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase-server';
+import { getSupabaseServer } from '@/lib/supabase-server';
 import { z } from 'zod';
 
 const createSchema = z.object({
@@ -14,6 +14,7 @@ export async function GET(request: Request) {
     const managerUserId = searchParams.get('managerUserId');
     if (!managerUserId) return NextResponse.json({ error: 'managerUserId required' }, { status: 400 });
 
+    const supabaseServer = getSupabaseServer();
     const { data: manager, error: managerError } = await supabaseServer
       .from('users')
       .select('id, role, family_id')

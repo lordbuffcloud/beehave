@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase-server';
+import { getSupabaseServer } from '@/lib/supabase-server';
 import { z } from 'zod';
 
 const loginSchema = z.object({
@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
     const { managerUserId, memberId, pin } = parsed.data;
 
+    const supabaseServer = getSupabaseServer();
     const { data: manager } = await supabaseServer
       .from('users')
       .select('id, role, family_id')

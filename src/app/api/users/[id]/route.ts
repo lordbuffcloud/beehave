@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase-server';
+import { getSupabaseServer } from '@/lib/supabase-server';
 import { mapUserFromDb } from '@/lib/mappers';
 
 export async function GET(_req: Request, context: unknown) {
@@ -8,6 +8,7 @@ export async function GET(_req: Request, context: unknown) {
     const userId = params?.id;
     if (!userId) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
 
+    const supabaseServer = getSupabaseServer();
     const { data, error } = await supabaseServer
       .from('users')
       .select('*')

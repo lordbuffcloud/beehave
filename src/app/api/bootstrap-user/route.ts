@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase-server';
+import { getSupabaseServer } from '@/lib/supabase-server';
 import { mapUserFromDb } from '@/lib/mappers';
 
 export async function POST(request: Request) {
@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     const displayName = name || email?.split('@')[0] || 'User';
 
     // Check if user exists
+    const supabaseServer = getSupabaseServer();
     const { data: existing, error: selectError } = await supabaseServer
       .from('users')
       .select('*')
