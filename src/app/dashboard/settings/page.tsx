@@ -12,7 +12,7 @@ import { ProtectedRoute } from '@/components/auth/protected-route';
 
 export default function SettingsPage() {
   const { user, loading: authLoading } = useAuth();
-  const [name, setName] = useState(user?.user_metadata?.name || '');
+  const [name, setName] = useState(user?.name || '');
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
