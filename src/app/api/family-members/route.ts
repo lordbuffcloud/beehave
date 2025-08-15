@@ -48,6 +48,7 @@ export async function POST(request: Request) {
     if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
     const { managerUserId, name, pin } = parsed.data;
 
+    const supabaseServer = getSupabaseServer();
     const { data: manager } = await supabaseServer
       .from('users')
       .select('id, role, family_id')
