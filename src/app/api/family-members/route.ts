@@ -65,12 +65,14 @@ export async function POST(request: Request) {
     const { data: member, error } = await supabaseServer
       .from('family_members')
       .insert({ family_id: manager.family_id, name, pin_hash: pinHash })
-      .select()
-      .single();
+      .select('id, name')
+      .maybeSingle();
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error && error.code !== 'PGRST116') {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
 
-    return NextResponse.json({ member });
+    return NextResponse.json({ member: member ?? { id: undefined, name } }, { status: 201 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
