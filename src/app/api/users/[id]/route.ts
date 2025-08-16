@@ -15,8 +15,15 @@ export async function GET(_req: Request, context: unknown) {
       .eq('id', userId)
       .maybeSingle();
 
-    if (error && (error as any).code !== 'PGRST116') {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    const errorCode = (() => {
+      if (typeof error === 'object' && error !== null && 'code' in (error as Record<string, unknown>)) {
+        const codeVal = (error as Record<string, unknown>).code;
+        return typeof codeVal === 'string' ? codeVal : String(codeVal);
+      }
+      return undefined;
+    })();
+    if (error && errorCode !== 'PGRST116') {
+      return NextResponse.json({ error: (error as { message: string }).message }, { status: 500 });
     }
     if (!data) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
