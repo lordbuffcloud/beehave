@@ -13,9 +13,14 @@ export async function GET(_req: Request, context: unknown) {
       .from('users')
       .select('*')
       .eq('id', userId)
-      .single();
+      .maybeSingle();
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error && (error as any).code !== 'PGRST116') {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    if (!data) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
 
     return NextResponse.json({ user: mapUserFromDb(data) });
   } catch (err: unknown) {
